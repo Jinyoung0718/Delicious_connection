@@ -1,0 +1,46 @@
+  .icons {
+    display: flex;
+    width: 1280px;
+    margin: auto;
+    list-style: none;
+    margin-bottom: 0; 
+ }
+  .icons li {
+    flex: 1;
+    background-color: #E2E2E2;
+    margin: 3rem 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+  }
+
+  .icons li:hover {
+    transform: scale(1.02); 
+}
+
+  
+  .image-container {
+    width: 100%;
+    object-fit: cover;
+    background-color: none;
+  }
+  
+  .image-container img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+  
+  .content {
+    padding: 1rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; 
+  }
+  
+  .content p {
+    margin: 0;
+  }
