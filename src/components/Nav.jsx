@@ -31,6 +31,10 @@ export default function Nav() {
     navigate(`/search?query=${e.target.value}`);
   };
 
+  const handleCookingPotClick = () => {
+    navigate('/recommed');
+  };
+
   return (
     <nav className={`nav ${show ? 'nav__black' : ''}`}>
       <Link to="/">
@@ -49,7 +53,7 @@ export default function Nav() {
       />
       <div className='logo_container'>
         <FaRegUserCircle size={'2.6rem'}/>
-        <PiCookingPotBold size={'2.6rem'}/>
+        <PiCookingPotBold size={'2.6rem'} onClick={handleCookingPotClick} />
       </div>
     </nav>
   );

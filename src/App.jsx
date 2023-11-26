@@ -5,6 +5,7 @@ import Nav from './components/Nav';
 import Footer from './components/Footer';
 import MainPage from './pages/MainPage'
 import SearchPage from './pages/SearchPage';
+import RecommendPage from './pages/RecommendPage';
 
 const Layout = () => {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<MainPage />} />
+            <Route path="/recommed" element={<RecommendPage />} />
             <Route path="/search" element={<SearchPage />} />
           </Route>
         </Routes>
@@ -35,5 +37,3 @@ function App() {
 }
 
 export default App;
-
-// / 는 공통부문요소, index는 처음 페이지 시작
