@@ -46,4 +46,8 @@ const SlideImage = styled.img`
   width: 1980px;
   height: 700px;
   object-fit: cover;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import spoonacularApi from '../api/spoonacularApi';
+import RecipeModal from './modals/RecipeModal';
 import styled from 'styled-components';
 import "./GlutenFreeRow.css";
 
@@ -16,6 +17,8 @@ import "swiper/css/scrollbar";
 
 function GlutenFreeRow() {
   const [recipes, setRecipes] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [recipeSelected, setRecipeSelected] = useState({});
 
   useEffect(() => {
     fetchData();
@@ -27,22 +30,28 @@ function GlutenFreeRow() {
     setRecipes(data);
   };
 
+  const handleClick = (recipe) => {
+    setModalOpen(true);
+    setRecipeSelected(recipe); 
+    console.log("recipe", recipe)
+  };
+
   return (
     <section id='Ranking_Row'>
       <h3 id='title'>GlutenFree diet</h3>
       <hr style={{ width: '300px' }} />
     <Swiper
       modules={[Navigation, Pagination, Scrollbar, A11y]}
-      navigation= {false}
+      navigation={{}}
       loop={true}
       spaceBetween={50}
-      slidesPerView={4}
+      slidesPerView={5}
     >
       {recipes.map((recipe) => (
         <SwiperSlide key={recipe.id} className="row__posters">
           <Container>
             <div className="image-container">
-              <img src={recipe.image} alt={recipe.title} />
+              <img src={recipe.image} alt={recipe.title} onClick={() => handleClick(recipe)}/>
               <p className="overlay-text">{recipe.title}</p>
             </div>
             <Gradient />
@@ -50,23 +59,27 @@ function GlutenFreeRow() {
         </SwiperSlide>
       ))}
     </Swiper>
-  </section>
+
+    {modalOpen && ( 
+        <RecipeModal {...recipeSelected} setModalOpen={setModalOpen} /> 
+      )}
+    </section>
   );
 }
 
 export default GlutenFreeRow;
 
 const Container = styled.div`
-
   border-radius: 2rem;
   overflow: hidden;
 
   img {
     width: 100%;
-    height: 110%;
-    object-fit: cover;
+    height: 80%;
+    object-position: center; 
   }
 `;
+
 
 const Gradient = styled.div`
   position: absolute;

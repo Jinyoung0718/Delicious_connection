@@ -17,8 +17,12 @@
 }
 
 .nav__logo {
-    width: 10%;
+    width: 50%;
     object-fit: contain;
+}
+
+.nav__logo:hover {
+    cursor: pointer;
 }
 
 .nav__input {
@@ -27,7 +31,9 @@
     color: gray;
     padding: 5px;
     border: none;
-    width: 30%;
+    width: 30rem;
+    transform:translate(-20%);
+    object-fit: cover;
 }
 
 .nav__input:focus {
@@ -41,4 +47,8 @@
 
 .logo_container svg {
     margin-right: 3rem; 
+}
+
+.logo_container svg:hover {
+    cursor: pointer; 
 }

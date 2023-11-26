@@ -32,6 +32,7 @@ const FooterContainer = styled.footer`
   color: white;
   padding: 20px;
   text-align: center;
+  margin-top: 5%;
 `;
 
 const FooterContent = styled.div`

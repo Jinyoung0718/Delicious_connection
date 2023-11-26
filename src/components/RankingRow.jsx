@@ -17,7 +17,7 @@ import "swiper/css/scrollbar";
 
 function RankingRow() {
   const [recipes, setRecipes] = useState([]);
-  const [modalOpen, setmodalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false)
   const [recipeSelected, setRecipeSelected] = useState({});
 
   useEffect(() => {
@@ -27,12 +27,14 @@ function RankingRow() {
   const fetchData = async () => {
     const request = await spoonacularApi.get('/recipes/random?number=12');
     const data = request.data.recipes;
+    console.log("data", data); // == recipes
     setRecipes(data);
   };
 
   const handleClick = (recipe) => {
-    setmodalOpen(true);
+    setModalOpen(true);
     setRecipeSelected(recipe); 
+    console.log("recipe", recipe)
   };
 
   return (
@@ -41,10 +43,10 @@ function RankingRow() {
       <hr style={{ width: '300px' }} />
     <Swiper
       modules={[Navigation, Pagination, Scrollbar, A11y]}
-      navigation= {false}
+      navigation={{}}
       loop={true}
       spaceBetween={50}
-      slidesPerView={4}
+      slidesPerView={5} 
     >
       {recipes.map((recipe) => (
         <SwiperSlide key={recipe.id} className="row__posters">
@@ -60,7 +62,7 @@ function RankingRow() {
     </Swiper>
 
     {modalOpen && ( 
-        <RecipeModal {...recipeSelected} setModalOpen={setmodalOpen} /> 
+        <RecipeModal {...recipeSelected} setModalOpen={setModalOpen} /> 
       )}
     </section>
   );
@@ -69,16 +71,16 @@ function RankingRow() {
 export default RankingRow;
 
 const Container = styled.div`
-
   border-radius: 2rem;
   overflow: hidden;
 
   img {
     width: 100%;
-    height: 110%;
-    object-fit: cover;
+    height: 80%;
+    object-position: center; 
   }
 `;
+
 
 const Gradient = styled.div`
   position: absolute;

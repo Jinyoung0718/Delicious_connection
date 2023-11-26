@@ -30,7 +30,6 @@ export default function Main() {
         <RankingRow />
         <VegetarianRow />
         <GlutenFreeRow />
-        <Footer />
         {modalVisible && (
           <YoutubeModal videoId = {youtubeVideoId} closeFunc={handleCloseButtonClick}/> // 프로퍼티 넘겨 줌, (비디오 주소, 이미지, x버튼 시 close 기능)
           ) }

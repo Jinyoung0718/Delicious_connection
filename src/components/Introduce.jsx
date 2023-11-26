@@ -6,6 +6,8 @@ import Introduce_2 from '../assets/Introduce_2.jpg';
 export default function Introduce() {
   return (
     <div className='Introduction'>
+            <h3 id='title'>Introduction</h3>
+      <hr style={{ width: '300px' }} />
       <ul className='icons'>
         <li>
           <div className="image-container">
