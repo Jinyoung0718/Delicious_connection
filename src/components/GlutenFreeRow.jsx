@@ -38,7 +38,7 @@ function GlutenFreeRow() {
 
   return (
     <section id='Ranking_Row'>
-      <h3 id='title'>GlutenFree diet</h3>
+      <h3 id='title'>GlutenFree Diet</h3>
       <hr style={{ width: '300px' }} />
     <Swiper
       modules={[Navigation, Pagination, Scrollbar, A11y]}

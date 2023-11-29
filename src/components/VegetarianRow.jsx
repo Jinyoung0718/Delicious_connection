@@ -38,7 +38,7 @@ function VegetarianRow() {
 
   return (
     <section id='Ranking_Row'>
-      <h3 id='title'>Vegetarian Picks</h3>
+      <h3 id='title'>Vegetarian Diet</h3>
       <hr style={{ width: '300px' }} />
     <Swiper
       modules={[Navigation, Pagination, Scrollbar, A11y]}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import logo from "../assets/logo.png";
-import { FaRegUserCircle } from "react-icons/fa";
+import { IoIosChatboxes } from "react-icons/io";
 import { PiCookingPotBold } from "react-icons/pi";
 import "./Nav.css";
 import { useNavigate, Link } from "react-router-dom";
@@ -31,9 +31,6 @@ export default function Nav() {
     navigate(`/search?query=${e.target.value}`);
   };
 
-  const handleCookingPotClick = () => {
-    navigate('/recommed');
-  };
 
   return (
     <nav className={`nav ${show ? 'nav__black' : ''}`}>
@@ -41,7 +38,7 @@ export default function Nav() {
         <img
           className='nav__logo'
           src={logo}
-          alt="stephenpbrown_logo"
+          alt="Delicious connection_logo"
         />
       </Link>
       <input
@@ -52,8 +49,10 @@ export default function Nav() {
         placeholder="search"
       />
       <div className='logo_container'>
-        <FaRegUserCircle size={'2.6rem'}/>
-        <PiCookingPotBold size={'2.6rem'} onClick={handleCookingPotClick} />
+        <IoIosChatboxes style={{ fontSize: '2.6rem'}}/>
+        <Link to="/recommed">
+        <PiCookingPotBold size={'2.6rem'} color='black'/>
+        </Link>
       </div>
     </nav>
   );

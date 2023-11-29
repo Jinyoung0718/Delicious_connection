@@ -7,7 +7,7 @@ export default function Introduce() {
   return (
     <div className='Introduction'>
             <h3 id='title'>Introduction</h3>
-      <hr style={{ width: '300px' }} />
+      <hr style={{ width: '300px', textAlign: 'center'}} />
       <ul className='icons'>
         <li>
           <div className="image-container">

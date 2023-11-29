@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Input, Button } from 'antd';
+import styled from 'styled-components';
+
 const { TextArea } = Input;
 
 const IngredientInput = ({ isLoading, onSubmit }) => {
@@ -14,15 +16,42 @@ const IngredientInput = ({ isLoading, onSubmit }) => {
   }
 
   return (
-    <div>
-      <TextArea
+    <Container>
+      <StyledTextArea
         value={userInput}
         onChange={handleUserInput}
         placeholder="Please enter the ingredients in order"
       />
-      <Button loading={isLoading} onClick={handleClick}>Let's Cook</Button>
-    </div>
+      <StyledButton loading={isLoading} onClick={handleClick}>
+        Let's Cook
+      </StyledButton>
+    </Container>
   );
 };
 
 export default IngredientInput;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const StyledTextArea = styled(TextArea)`
+  width: 90%; /* Adjust the width as needed */
+  height: 10rem;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+`;
+
+const StyledButton = styled(Button)`
+  width: 150px;
+  background-color: #1890ff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+
+  &:hover {
+    background-color: #096dd9;
+  }
+`;

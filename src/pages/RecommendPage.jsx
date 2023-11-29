@@ -47,21 +47,25 @@ export default function RecommendPage() {
 }
 
 const AppContainer = styled.div`
-  padding: 20px;
+  padding: 3%;
   display: flex;
   flex-direction: column;
-  max-width: 80%;
-  width: 100%;
-  margin: 0 auto;
-  margin-bottom: 14.6%;
+  width: 80%;
+  height: 40%;
+  margin: auto;
+  margin-top: 20vh; 
+  background-color: #f8f8f8;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 `;
 
 const AppTitle = styled.div`
   font-weight: 400;
-  font-size: 35px;
+  font-size: 30px;
   text-align: center;
   font-family: "Noto Serif KR";
   margin-bottom: 20px;
+  color: #333;
 `;
 
 const DataContainer = styled.div`
@@ -75,10 +79,12 @@ const DataTitle = styled.div`
   font-size: 24px;
   font-weight: 600;
   margin-bottom: 10px;
+  color: #555;
 `;
 
 const DataText = styled.div`
   margin-bottom: 8px;
+  color: #777;
 `;
 
 const RecipeImage = styled.img`
@@ -88,4 +94,3 @@ const RecipeImage = styled.img`
   margin-top: 20px;
   border-radius: 8px;
 `;
-
