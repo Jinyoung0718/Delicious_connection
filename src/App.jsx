@@ -3,9 +3,12 @@ import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
 import './App.css';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
-import MainPage from './pages/MainPage'
-import SearchPage from './pages/SearchPage';
-import RecommendPage from './pages/RecommendPage';
+import MainPage from './pages/MainPage/MainPage'
+import SearchPage from './pages/SearchPage/SearchPage';
+import RecommendPage from './pages/RecommendPage/RecommendPage';
+import Login from './pages/login/Login';
+import Singup from './pages/signup/Signup';
+import CommunityPage from './pages/communityPage/CommunityPage';
 import styled from 'styled-components';
 
 const LayoutContainer = styled.div`
@@ -42,6 +45,9 @@ function App() {
             <Route index element={<MainPage />} />
             <Route path="/recommed" element={<RecommendPage />} />
             <Route path="/search" element={<SearchPage />} />
+            <Route path="/comminity" element={<CommunityPage />}></Route>
+            <Route path="/login" element={<Login />}></Route>
+            <Route path="/signup" element={<Singup />}></Route>
           </Route>
         </Routes>
       </BrowserRouter>

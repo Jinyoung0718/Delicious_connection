@@ -25,7 +25,6 @@ export const CallGPT = async ({ prompt }) => {
             tips: "Here is [tips]",
             image: "Here is [image]"
         }
-        
             
             [events]:`,
       },

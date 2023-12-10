@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useDebounce } from '../hook/useDebounce';
-import spoonacularApi from '../api/spoonacularApi';
-import RecipeModal from '../components/modals/RecipeModal';
+import { useDebounce } from '../../hook/useDebounce';
+import spoonacularApi from '../../api/spoonacularApi';
+import RecipeModal from '../../components/modals/RecipeModal';
 import './SearchPage.css';
 
 export default function SearchPage() {

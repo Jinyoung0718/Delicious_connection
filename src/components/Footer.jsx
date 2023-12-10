@@ -1,63 +1,30 @@
 import React from 'react';
-import styled from 'styled-components';
 import { AiOutlineInstagram, AiOutlineYoutube, AiOutlineFacebook } from 'react-icons/ai';
+import './Footer.css'; 
 
 const Footer = () => {
   return (
-    <FooterContainer>
-      <FooterContent>
-        <SocialIcons>
-        <SocialIconLink href="https://www.instagram.com" target="_blank">
-          <AiOutlineInstagram size={30} />
-        </SocialIconLink>
-        <SocialIconLink href="https://www.youtube.com" target="_blank">
-          <AiOutlineYoutube size={30} />
-        </SocialIconLink>
-        <SocialIconLink href="https://www.facebook.com" target="_blank">
-          <AiOutlineFacebook size={30} />
-        </SocialIconLink>
-        </SocialIcons>
-        <TextContainer>
+    <footer className="footer-container">
+      <div className="footer-content">
+        <div className="social-icons">
+          <a className="social-icon-link" href="https://www.instagram.com" target="blank">
+            <AiOutlineInstagram size={30} />
+          </a>
+          <a className="social-icon-link" href="https://www.youtube.com" target="blank">
+            <AiOutlineYoutube size={30} />
+          </a>
+          <a className="social-icon-link" href="https://www.facebook.com" target="blank">
+            <AiOutlineFacebook size={30} />
+          </a>
+        </div>
+        <div className="text-container">
           <h1>Everyone can cook easily</h1>
           <hr style={{ width: '300px' }} />
           <p>“If it tastes good then it’s 0 calories”</p>
-        </TextContainer>
-      </FooterContent>
-    </FooterContainer>
+        </div>
+      </div>
+    </footer>
   );
 };
-
-const FooterContainer = styled.footer`
-  background-color: #333;
-  color: white;
-  padding: 20px;
-  text-align: center;
-  margin-top: 5%;
-`;
-
-const FooterContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const SocialIconLink = styled.a`
-  color: white;
-  text-decoration: none;
-  &:hover {
-    color: #ccc;
-  }
-`;
-
-const SocialIcons = styled.div`
-  display: flex;
-  gap: 20px;
-`;
-
-const TextContainer = styled.div`
-  text-align: center;
-  font-weight: 200;
-  font-size: 100%;
-`;
 
 export default Footer;

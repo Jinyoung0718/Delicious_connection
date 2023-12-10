@@ -49,7 +49,9 @@ export default function Nav() {
         placeholder="search"
       />
       <div className='logo_container'>
-        <IoIosChatboxes style={{ fontSize: '2.6rem'}}/>
+        <Link to="/login">
+        <IoIosChatboxes size={'2.6rem'} color='black'/>
+        </Link>
         <Link to="/recommed">
         <PiCookingPotBold size={'2.6rem'} color='black'/>
         </Link>
