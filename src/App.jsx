@@ -45,14 +45,16 @@ function App() {
             <Route index element={<MainPage />} />
             <Route path="/recommed" element={<RecommendPage />} />
             <Route path="/search" element={<SearchPage />} />
-            <Route path="/comminity" element={<CommunityPage />}></Route>
-            <Route path="/login" element={<Login />}></Route>
-            <Route path="/signup" element={<Singup />}></Route>
           </Route>
+
+          <Route path="/community*" element={<CommunityPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Singup />} />
         </Routes>
       </BrowserRouter>
     </div>
   );
 }
+
 
 export default App;
