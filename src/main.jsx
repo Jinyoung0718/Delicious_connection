@@ -4,7 +4,7 @@ import App from './App.jsx'
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode basename="Delicioues_connection">
+  <React.StrictMode basename="Delicious_connection">
     <App />
   </React.StrictMode>,
 )
