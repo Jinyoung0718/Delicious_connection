@@ -1,15 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const YoutubeModal = (props) => { // 프로퍼티를 받음
+const YoutubeModal = (props) => { 
     const {
-        closeFunc,
+      onCloseButtonClick,
         videoId
     } = props;
     return (
         <Container>
           <HomeContainer>
-            <CloseButton onClick={closeFunc}>x</CloseButton>
+            <CloseButton onClick={onCloseButtonClick}>x</CloseButton>
             <Iframe
               width="640"
               height="360"

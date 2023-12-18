@@ -28,10 +28,8 @@ export default function Main() {
         <VegetarianRow />
         <GlutenFreeRow />
         {modalVisible && (
-          <YoutubeModal videoId = {youtubeVideoId} closeFunc={handleCloseButtonClick}/> // 프로퍼티 넘겨 줌, (비디오 주소, 이미지, x버튼 시 close 기능)
+          <YoutubeModal videoId = {youtubeVideoId} onCloseButtonClick={handleCloseButtonClick}/> 
           ) }
     </header>
   );
 }
-
-// <Banner handleSlideClick={handleSlideClick}/> 에서 넘겨진 함수는 Banner에서 프로퍼티를 받아 함수 사용시 부모요소인 현 페이지 스테이트 값을 변경함

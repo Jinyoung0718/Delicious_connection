@@ -2,23 +2,23 @@ import React, { useState, useEffect } from 'react';
 import spoonacularApi from '../api/spoonacularApi';
 import RecipeModal from './modals/RecipeModal';
 import styled from 'styled-components';
-import "./RankingRow.css";
+import './RankingRow.css';
 
 // Import Swiper core and required modules
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 
 function RankingRow() {
-  const [recipes, setRecipes] = useState([]);
-  const [modalOpen, setModalOpen] = useState(false)
-  const [recipeSelected, setRecipeSelected] = useState({});
+  const [rankingRecipes, setRankingRecipes] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedRecipe, setSelectedRecipe] = useState({});
 
   useEffect(() => {
     fetchData();
@@ -28,12 +28,12 @@ function RankingRow() {
     const request = await spoonacularApi.get('/recipes/random?number=12');
     const data = request.data.recipes;
     console.log("data", data); // == recipes
-    setRecipes(data);
+    setRankingRecipes(data);
   };
 
   const handleClick = (recipe) => {
-    setModalOpen(true);
-    setRecipeSelected(recipe); 
+    setIsModalOpen(true);
+    setSelectedRecipe(recipe); 
     console.log("recipe", recipe)
   };
 
@@ -41,28 +41,27 @@ function RankingRow() {
     <section id='Ranking_Row'>
       <h3 id='title'>Ranking Diet</h3>
       <hr style={{ width: '300px' }} />
-    <Swiper
-      modules={[Navigation, Pagination, Scrollbar, A11y]}
-      navigation={{}}
-      loop={true}
-      spaceBetween={50}
-      slidesPerView={5} 
-    >
-      {recipes.map((recipe) => (
-        <SwiperSlide key={recipe.id} className="row__posters">
-          <Container>
-            <div className="image-container">
-              <img src={recipe.image} alt={recipe.title}  onClick={() => handleClick(recipe)} />
-              <p className="overlay-text">{recipe.title}</p>
-            </div>
-            <Gradient />
-          </Container>
-        </SwiperSlide>
-      ))}
-    </Swiper>
-
-    {modalOpen && ( 
-        <RecipeModal {...recipeSelected} setModalOpen={setModalOpen} /> 
+      <Swiper
+        modules={[Navigation, Pagination, Scrollbar, A11y]}
+        navigation={{}}
+        loop={true}
+        spaceBetween={50}
+        slidesPerView={5} 
+      >
+        {rankingRecipes.map((recipe) => (
+          <SwiperSlide key={recipe.id} className="row__posters">
+            <Container>
+              <div className="image-container">
+                <img src={recipe.image} alt={recipe.title}  onClick={() => handleClick(recipe)} />
+                <p className="overlay-text">{recipe.title}</p>
+              </div>
+              <Gradient />
+            </Container>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+      {isModalOpen && ( 
+        <RecipeModal {...selectedRecipe} setIsModalOpen={setIsModalOpen} /> 
       )}
     </section>
   );
@@ -80,7 +79,6 @@ const Container = styled.div`
     object-position: center; 
   }
 `;
-
 
 const Gradient = styled.div`
   position: absolute;

@@ -1,11 +1,11 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
-import useOnClickOut from '../../hook/useOnClickOut';
+import useClickOutside from '../../hook/useClickOutside';
 
-export default function RecipeModal({ id, image, summary, title, diets, nutrition, extendedIngredients, setModalOpen }) {
+export default function RecipeModal({ id, image, summary, title, diets, nutrition, extendedIngredients, setIsModalOpen }) {
   const ref = useRef();
-  useOnClickOut(ref, () => {
-    setModalOpen(false);
+  useClickOutside(ref, () => {
+    setIsModalOpen(false);
   });
 
   return (
@@ -17,19 +17,21 @@ export default function RecipeModal({ id, image, summary, title, diets, nutritio
             <img src={image} alt={title} />
             <StyledSummary dangerouslySetInnerHTML={{ __html: summary }} />
           </LeftContent>
-          <RightContent><ul style={{listStyle: 'none'}}>
+          <RightContent>
+            <ul style={{ listStyle: 'none' }}>
               {(extendedIngredients || nutrition.ingredients) &&
                 ((extendedIngredients || nutrition.ingredients).map((ingredient, id) => (
-                  <li key={id} style={{padding:'2%', fontSize:'1.2rem', fontWeight: '300'}}>{ingredient.name}</li>
+                  <li key={id} style={{ padding: '2%', fontSize: '1.2rem', fontWeight: '300' }}>{ingredient.name}</li>
                 )))}
             </ul>
           </RightContent>
         </FlexContainer>
-        <button onClick={() => setModalOpen(false)}>Close</button>
+        <button onClick={() => setIsModalOpen(false)}>Close</button>
       </ModalContent>
     </ModalOverlay>
   );
 }
+
 
 const ModalOverlay = styled.div`
   position: fixed;
