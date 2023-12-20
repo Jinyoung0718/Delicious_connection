@@ -21,7 +21,7 @@ export default function Main() {
   };
 
   return (
-    <header>
+    <div>
         <Banner handleSlideClick={handleSlideClick}/> 
         <Introduce />
         <RankingRow />
@@ -30,6 +30,6 @@ export default function Main() {
         {modalVisible && (
           <YoutubeModal videoId = {youtubeVideoId} onCloseButtonClick={handleCloseButtonClick}/> 
           ) }
-    </header>
+    </div>
   );
 }

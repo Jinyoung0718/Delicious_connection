@@ -1,16 +1,17 @@
-  .swiper-pagination-bullet-active {
-    background: black !important;
-  }
-  
-  .swiper-button-prev {
-    color: black !important;
-  }
-  
-  .swiper-button-next {
-    color: black !important;
-  }
-  
-  .swiper-button-next:after, .swiper-button-prev:after{
-    font-size: 1.3rem !important;
-    font-weight: 600 !important;
-  }
+/* 기본 슬라이더 스타일 */
+.swiper-pagination-bullet-active {
+  background: black !important;
+}
+
+.swiper-button-prev {
+  color: black !important;
+}
+
+.swiper-button-next {
+  color: black !important;
+}
+
+.swiper-button-next:after, .swiper-button-prev:after{
+  font-size: 1.3rem !important;
+  font-weight: 600 !important;
+}

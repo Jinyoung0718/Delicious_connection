@@ -55,7 +55,7 @@ export default function SearchPage() {
     <div className='recipe-container'>
       {searchResults.map((recipe) => (
         <div key={recipe.id} className="recipe-item">
-          <img src={recipe.image}  alt={`${recipe.title} 이미지`} className="recipe-image" onClick={() => handleClick(recipe)} />
+          <img src={recipe.image}  alt={`${recipe.title} image`} className="recipe-image" onClick={() => handleClick(recipe)} />
           <hr style={{ width: '240px' }} />
           <h4 className="recipe-title">{recipe.title}</h4>
         </div>
