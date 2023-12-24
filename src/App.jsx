@@ -39,7 +39,7 @@ const Layout = () => {
 function App() {
   return (
     <div className="app">
-      <BrowserRouter basename="/delicious-connection/">
+      <BrowserRouter basename="/Delicious_connection/">
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<MainPage />} />
