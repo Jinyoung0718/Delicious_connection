@@ -39,7 +39,7 @@ const Layout = () => {
 function App() {
   return (
     <div className="app">
-      <BrowserRouter>
+      <BrowserRouter basename="/delicious-connection/">
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<MainPage />} />
@@ -47,7 +47,7 @@ function App() {
             <Route path="/search" element={<SearchPage />} />
           </Route>
 
-          <Route path="/community*" element={<CommunityPage />} />
+          <Route path="/community/*" element={<CommunityPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Singup />} />
         </Routes>
