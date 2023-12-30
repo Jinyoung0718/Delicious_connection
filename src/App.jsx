@@ -10,6 +10,7 @@ import Login from './pages/login/Login';
 import Singup from './pages/signup/Signup';
 import CommunityPage from './pages/communityPage/CommunityPage';
 import styled from 'styled-components';
+import MyPage from './pages/MyPage/MyPage';
 
 const LayoutContainer = styled.div`
   display: flex;
@@ -45,6 +46,7 @@ function App() {
             <Route index element={<MainPage />} />
             <Route path="/recommed" element={<RecommendPage />} />
             <Route path="/search" element={<SearchPage />} />
+            <Route path="/MyPage" element={<MyPage />} />
           </Route>
 
           <Route path="/community/*" element={<CommunityPage />} />

@@ -1,12 +1,33 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import useClickOutside from '../../hook/useClickOutside';
 
 export default function RecipeModal({ id, image, summary, title, diets, nutrition, extendedIngredients, setIsModalOpen }) {
   const ref = useRef();
-  useClickOutside(ref, () => {
-    setIsModalOpen(false);
+  useClickOutside(ref, () => setIsModalOpen(false));
+
+  const [likedRecipes, setLikedRecipes] = useState(() => {
+    return JSON.parse(localStorage.getItem("likedRecipes")) || []; 
   });
+
+  const [isLiked, setIsLiked] = useState(() => {
+    return likedRecipes.some(recipe => recipe.id === id);
+  });
+
+  useEffect(() => {
+    setIsLiked(likedRecipes.some(recipe => recipe.id === id));
+  }, [likedRecipes, id]);
+
+  const handleLike = () => {
+    let newLikedRecipes;
+    if (isLiked) {
+      newLikedRecipes = likedRecipes.filter(recipe => recipe.id !== id);
+    } else {
+      newLikedRecipes = [...likedRecipes, {id, image, title}];
+    }
+    setLikedRecipes(newLikedRecipes);
+    localStorage.setItem("likedRecipes", JSON.stringify(newLikedRecipes));
+  };
 
   return (
     <ModalOverlay>
@@ -18,20 +39,26 @@ export default function RecipeModal({ id, image, summary, title, diets, nutritio
             <StyledSummary dangerouslySetInnerHTML={{ __html: summary }} />
           </LeftContent>
           <RightContent>
-            <ul style={{ listStyle: 'none' }}>
-              {(extendedIngredients || nutrition.ingredients) &&
-                ((extendedIngredients || nutrition.ingredients).map((ingredient, id) => (
-                  <li key={id} style={{ padding: '2%', fontSize: '1.2rem', fontWeight: '300' }}>{ingredient.name}</li>
+            <ul style={{ marginTop: '20%' }}>
+              {
+                ((extendedIngredients || nutrition.ingredients).map((ingredient, index) => (
+                  <li key={index} style={{ padding: '2%', fontSize: '1.2rem', fontWeight: '300' }}>{ingredient.name}</li>
                 )))}
             </ul>
           </RightContent>
         </FlexContainer>
-        <button onClick={() => setIsModalOpen(false)}>Close</button>
+        <ButtonContainer>
+          <LikeButton onClick={handleLike} style={{
+                color: isLiked ? '#ff4757' : 'rgba(0, 0, 0, 0.3)', 
+                borderColor: isLiked ? '#ff4757' : 'rgba(0, 0, 0, 0.3)',
+                background: isLiked ? '#ffe8e8' : 'transparent'
+              }}>♥</LikeButton>
+          <CloseButton onClick={() => setIsModalOpen(false)}>Close</CloseButton>
+        </ButtonContainer>
       </ModalContent>
     </ModalOverlay>
   );
 }
-
 
 const ModalOverlay = styled.div`
   position: fixed;
@@ -39,57 +66,37 @@ const ModalOverlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
+  max-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 5;
-  background-color: rgba(0, 0, 0, 0.6); 
-  backdrop-filter: blur(5px); 
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.75); 
+  backdrop-filter: blur(8px); 
 `;
 
-
 const ModalContent = styled.div`
-  background: white;
-  padding: 2rem;
-  border-radius: 10px;
-  max-width: 60%; 
-  width: 100%;
-  height: 85%;
+  background: #f8f8f8; 
+  padding: 1rem; 
+  border-radius: 12px; 
+  width: 80%; 
+  max-width: 850px; 
+  max-height: 90vh;
+  height: 100%;
   overflow-x: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); 
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-
-  h2 {
-    font-size: 1.5rem;
-    text-align: center;
-    text-transform: uppercase;
-    margin: 0%;
-  }
-
-  button {
-    padding: 10px 20px;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  
-    &:hover {
-      background-color: #367c39;
-    }
-  }
 `;
 
 const FlexContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20px;
 `;
 
 const LeftContent = styled.div`
+  text-align: center;
   flex: 1;
   margin-right: 20px;
 
@@ -108,11 +115,55 @@ const RightContent = styled.div`
 `;
 
 const StyledSummary = styled.div`
-  background-color:  #E2E2E2;
-  padding: 2%;
-  margin: 2%;
-  border-radius: 4px;
-  text-align: center;
+  background-color: #FFF;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 8px;
   font-size: 1rem;
   line-height: 1.5;
+  text-align: justify;
 `;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 1rem;
+`;
+
+const LikeButton = styled.button`
+  font-size: 1.5rem;
+  color: #ff4757;
+  border: 2px solid #ff4757;
+  background: transparent;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: white;
+    background-color: #ff4757;
+  }
+`;
+
+
+
+const CloseButton = styled.button`
+  font-size: 1rem; 
+  color: #333;
+  border: 2px solid #333;
+  background: transparent;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 10px; 
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: black;
+    border-color: #666;
+    background: #f0f0f0;
+    transform: scale(1.05);
+  }
+`;
+

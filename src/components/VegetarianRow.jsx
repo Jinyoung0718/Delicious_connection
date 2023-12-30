@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import spoonacularApi from '../api/spoonacularApi';
 import RecipeModal from './modals/RecipeModal';
+import { IoReloadSharp } from "react-icons/io5";
 import styled from 'styled-components';
 import './VegetarianRow.css';
 
@@ -25,10 +26,18 @@ function VegetarianRow() {
   }, []);
 
   const fetchData = async () => {
-    const request = await spoonacularApi.get('/recipes/random?number=12&tags=vegetarian');
-    const data = request.data.recipes;
-    setVegetarianRecipes(data);
+    const check = localStorage.getItem('vegetarianRecipes');
+
+    if (check) {
+      setVegetarianRecipes(JSON.parse(check));
+    } else {
+      const request = await spoonacularApi.get('/recipes/random?number=16&tags=vegetarian');
+      const data = request.data.recipes;
+      localStorage.setItem('vegetarianRecipes', JSON.stringify(data));
+      setVegetarianRecipes(data);
+    }
   };
+
 
   const handleClick = (recipe) => {
     setIsModalOpen(true);
@@ -36,10 +45,20 @@ function VegetarianRow() {
     console.log("recipe", recipe)
   };
 
+  const handleRefresh = async () => {
+    const request = await spoonacularApi.get('/recipes/random?number=16');
+    const data = request.data.recipes;
+    setVegetarianRecipes(data);
+    localStorage.setItem('vegetarianRecipes', JSON.stringify(data));
+  };
+
   return (
     <section id='Ranking_Row'>
       <h3 id='title'>Vegetarian Diet</h3>
       <hr style={{ width: '300px' }} />
+      <div style={{ display: 'flex', justifyContent: 'flex-end', marginRight: '50px' }}>
+    <StyledReloadIcon onClick={handleRefresh} size={'1.4rem'} />
+    </div>
       <Swiper
         modules={[Navigation, Pagination, Scrollbar, A11y]}
         navigation={{}}
@@ -59,9 +78,9 @@ function VegetarianRow() {
           </SwiperSlide>
         ))}
       </Swiper>
-      {isModalOpen ? (
-        <RecipeModal {...selectedRecipe} setIsModalOpen={setIsModalOpen} />
-      ) : null}
+      {isModalOpen && ( 
+        <RecipeModal {...selectedRecipe} setIsModalOpen={setIsModalOpen} /> 
+      )}
     </section>
   );
 }
@@ -76,6 +95,13 @@ const Container = styled.div`
     width: 100%;
     height: 80%;
     object-position: center; 
+    transition: transform 0.3s ease, opacity 0.3s ease; 
+
+    &:hover {
+      opacity: 0.8; 
+      transform: scale(1.05); 
+      cursor: pointer;
+    }
   }
 `;
 
@@ -83,4 +109,13 @@ const Gradient = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
+`;
+
+const StyledReloadIcon = styled(IoReloadSharp)`
+  cursor: pointer;
+  transition: color 0.3s ease; 
+
+  &:hover {
+    color:  #822d2d; 
+  }
 `;

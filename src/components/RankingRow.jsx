@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import spoonacularApi from '../api/spoonacularApi';
 import RecipeModal from './modals/RecipeModal';
+import { IoReloadSharp } from "react-icons/io5";
 import styled from 'styled-components';
 import './RankingRow.css';
 
@@ -25,11 +26,19 @@ function RankingRow() {
   }, []);
 
   const fetchData = async () => {
-    const request = await spoonacularApi.get('/recipes/random?number=12');
-    const data = request.data.recipes;
-    console.log("data", data); // == recipes
-    setRankingRecipes(data);
+    const check = localStorage.getItem('rankingRecipes');
+
+    if (check) {
+      setRankingRecipes(JSON.parse(check));
+    } else {
+      const request = await spoonacularApi.get('/recipes/random?number=16');
+      const data = request.data.recipes;
+      console.log("data", data); 
+      localStorage.setItem('rankingRecipes', JSON.stringify(data));
+      setRankingRecipes(data);
+    }
   };
+
 
   const handleClick = (recipe) => {
     setIsModalOpen(true);
@@ -37,10 +46,20 @@ function RankingRow() {
     console.log("recipe", recipe)
   };
 
+  const handleRefresh = async () => {
+    const request = await spoonacularApi.get('/recipes/random?number=16');
+    const data = request.data.recipes;
+    setRankingRecipes(data);
+    localStorage.setItem('rankingRecipes', JSON.stringify(data));
+  };
+
   return (
     <section id='Ranking_Row'>
       <h3 id='title'>Ranking Diet</h3>
       <hr style={{ width: '300px' }} />
+      <div style={{ display: 'flex', justifyContent: 'flex-end', marginRight: '50px' }}>
+    <StyledReloadIcon onClick={handleRefresh} size={'1.4rem'} />
+    </div>
       <Swiper
         modules={[Navigation, Pagination, Scrollbar, A11y]}
         navigation={{}}
@@ -77,6 +96,13 @@ const Container = styled.div`
     width: 100%;
     height: 80%;
     object-position: center; 
+    transition: transform 0.3s ease, opacity 0.3s ease; 
+
+    &:hover {
+      opacity: 0.8; 
+      transform: scale(1.05); 
+      cursor: pointer;
+    }
   }
 `;
 
@@ -84,4 +110,13 @@ const Gradient = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
+`;
+
+const StyledReloadIcon = styled(IoReloadSharp)`
+  cursor: pointer;
+  transition: color 0.3s ease; 
+
+  &:hover {
+    color:  #822d2d; 
+  }
 `;
